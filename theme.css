@@ -977,6 +977,42 @@ body.nemo-disable-active-line-indicator .markdown-source-view.mod-cm6 .cm-active
    13. MOBILE
    ============================================ */
 
+body.is-mobile {
+  --input-radius: var(--nemo-corner-radius, 0px);
+  --pill-radius: var(--nemo-corner-radius, 0px);
+  --touch-radius-xxs: var(--nemo-corner-radius, 0px);
+  --touch-radius-xs: var(--nemo-corner-radius, 0px);
+  --touch-radius-s: var(--nemo-corner-radius, 0px);
+  --touch-radius-m: var(--nemo-corner-radius, 0px);
+  --touch-radius-l: var(--nemo-corner-radius, 0px);
+  --touch-radius-xl: var(--nemo-corner-radius, 0px);
+
+  /* Dock geometry (reading mode) */
+  --nemo-dock-h: 68px;
+  --nemo-dock-w: min(76%, 340px);
+  --nemo-fab: 88px;
+  --nemo-dock-icon: 32px;
+  --nemo-fab-icon: 52px;
+  --nemo-icon-stroke: 3px;
+  --nemo-edge: 12px;
+  --nemo-gap: 12px;
+  --nemo-dock-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  --nemo-dock-border: 2px;
+}
+
+/* Editing mode: smaller, to match the other editor controls */
+body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
+  --nemo-dock-h: 50px;
+  --nemo-dock-w: min(76%, 320px);
+  --nemo-fab: 52px;
+  --nemo-dock-icon: 24px;
+  --nemo-fab-icon: 28px;
+  --nemo-icon-stroke: 2.75px;
+  --nemo-edge: 8px;
+  --nemo-gap: 8px;
+  --nemo-dock-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+}
+
 .is-mobile .workspace-drawer,
 .is-mobile .workspace-drawer-inner,
 .is-mobile .workspace-drawer-header,
@@ -987,51 +1023,177 @@ body.nemo-disable-active-line-indicator .markdown-source-view.mod-cm6 .cm-active
   background-color: var(--background-secondary);
 }
 
+/* ---- Top: no border, header blends into the page ---- */
 .is-mobile .view-header {
-  background-color: var(--background-secondary);
-  border-bottom: 1px solid var(--background-modifier-border);
-  border-radius: var(--radius-s);
-}
-
-/* Bottom navigation: native positioning kept; restyle surface only.
-   FIX: --navbar-height / --icon-size now set on .mobile-navbar,
-   where Obsidian reads them. */
-.is-mobile .mobile-navbar {
-  --navbar-height: var(--nemo-mobile-navbar-height, 48px);
-  --icon-size: var(--nemo-mobile-navbar-icon-size, 22px);
-  --icon-color: var(--text-normal);
-  background-color: var(--background-secondary);
-  border: 1px solid var(--background-modifier-border);
-  border-radius: var(--radius-s);
+  background-color: var(--background-primary) !important;
+  border: none !important;
+  border-bottom: none !important;
   box-shadow: none !important;
-  color: var(--text-normal);
+  border-radius: 0;
 }
 
-.is-mobile .mobile-navbar .clickable-icon {
-  color: var(--text-normal);
+.is-mobile .workspace-tab-header-container {
+  background-image: none !important;
+  border: none !important;
 }
 
-/* Optional full-width phone bar. */
-body.nemo-mobile-navbar-full-width.is-phone {
-  --navbar-bottom-offset: 0px;
+.is-mobile .workspace-split.mod-root .workspace-tab-container {
+  border: none !important;
 }
 
-body.nemo-mobile-navbar-full-width.is-phone .mobile-navbar {
-  width: 100%;
-  max-width: none;
-  left: 0;
-  right: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 0;
-}
-
-/* Touch targets only where needed (not the bottom navbar). */
 .is-mobile .view-header .clickable-icon {
   min-width: var(--nemo-mobile-touch-target, 44px);
   min-height: var(--nemo-mobile-touch-target, 44px);
 }
 
+/* ---- Release ancestors (main note area only, not the drawer) ---- */
+.is-mobile .workspace-split.mod-root .view-header,
+.is-mobile .workspace-split.mod-root .view-header .view-actions,
+.is-mobile .workspace-split.mod-root .workspace-leaf-content {
+  transform: none !important;
+  contain: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* ---- Bottom dock: square, centered, narrower, lime border ---- */
+.is-mobile .mobile-navbar {
+  position: fixed !important;
+  left: calc((100% - var(--nemo-dock-w)) / 2) !important;
+  right: auto !important;
+  bottom: var(--nemo-dock-bottom) !important;
+  width: var(--nemo-dock-w) !important;
+  max-width: none !important;
+  height: var(--nemo-dock-h) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  z-index: 10 !important;
+  background-color: var(--background-secondary) !important;
+  border: var(--nemo-dock-border) solid var(--text-accent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--text-normal);
+}
+
+.is-mobile .mobile-navbar-actions {
+  --navbar-height: var(--nemo-dock-h);
+  --icon-size: var(--nemo-dock-icon);
+  --icon-stroke: var(--nemo-icon-stroke);
+  --icon-color: var(--text-normal);
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.is-mobile .mobile-navbar .clickable-icon {
+  color: var(--text-normal);
+  border-radius: 0;
+  min-width: 0;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Neobrutal icons: thick strokes, square caps, sharp corners */
+.is-mobile .mobile-navbar svg,
+.is-mobile .view-header .view-action[aria-label^="Current view"] svg {
+  stroke-width: var(--nemo-icon-stroke) !important;
+  stroke-linecap: square !important;
+  stroke-linejoin: miter !important;
+}
+
+.is-mobile .mobile-navbar svg *,
+.is-mobile .view-header .view-action[aria-label^="Current view"] svg * {
+  stroke-linecap: square !important;
+  stroke-linejoin: miter !important;
+}
+
+.is-mobile .mobile-navbar svg rect,
+.is-mobile .mobile-navbar svg path,
+.is-mobile .view-header .view-action[aria-label^="Current view"] svg rect {
+  rx: 0;
+  ry: 0;
+}
+
+.is-mobile .mobile-navbar .clickable-icon svg {
+  width: var(--nemo-dock-icon);
+  height: var(--nemo-dock-icon);
+}
+
+/* Tab-count box: square it off */
+.is-mobile .mobile-navbar .clickable-icon * {
+  border-radius: 0 !important;
+}
+
+.is-mobile .mobile-navbar .clickable-icon:active {
+  background-color: var(--text-accent);
+  color: #111111;
+}
+
+/* ---- Read/Edit button: floats above the dock, right side ---- */
+.is-mobile .view-header .view-action[aria-label^="Current view"] {
+  position: fixed !important;
+  right: var(--nemo-edge) !important;
+  bottom: calc(var(--nemo-dock-bottom) + var(--nemo-dock-h) + var(--nemo-gap)) !important;
+  top: auto !important;
+  left: auto !important;
+  width: var(--nemo-fab) !important;
+  height: var(--nemo-fab) !important;
+  min-width: var(--nemo-fab) !important;
+  min-height: var(--nemo-fab) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  z-index: 11 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--text-accent) !important;
+  border: var(--nemo-dock-border) solid var(--text-accent) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #111111 !important;
+}
+
+.is-mobile .view-header .view-action[aria-label^="Current view"] svg {
+  width: var(--nemo-fab-icon) !important;
+  height: var(--nemo-fab-icon) !important;
+  color: #111111 !important;
+  stroke: #111111 !important;
+}
+
+.is-mobile .view-header .view-action[aria-label^="Current view"]:active {
+  background-color: var(--background-secondary) !important;
+}
+
+.is-mobile .view-header .view-action[aria-label^="Current view"]:active svg {
+  color: var(--text-accent) !important;
+  stroke: var(--text-accent) !important;
+}
+
+/* ---- Editing toolbar above the keyboard matches the dock ---- */
+.is-mobile .mobile-toolbar {
+  background-color: var(--background-secondary);
+  border-top: var(--nemo-dock-border) solid var(--text-accent);
+  border-radius: 0;
+}
+
+.is-mobile .mobile-toolbar .clickable-icon {
+  color: var(--text-normal);
+  border-radius: 0;
+}
+
+/* ---- Misc ---- */
 .is-mobile .suggestion-container,
 .is-mobile .menu {
   border-color: var(--modal-border-color, var(--background-modifier-border));
@@ -1040,6 +1202,34 @@ body.nemo-mobile-navbar-full-width.is-phone .mobile-navbar {
 .is-mobile .markdown-rendered,
 .is-mobile .markdown-source-view {
   line-height: var(--line-height-normal);
+}
+
+.is-mobile .modal-close-button,
+.is-mobile .prompt-input-container,
+.is-mobile .search-input-container,
+.is-mobile .search-input-container input,
+.is-mobile .modal,
+.is-mobile .modal-container .modal {
+  border-radius: var(--radius-m);
+}
+
+/* Keep the last lines of a note from hiding behind the dock and button */
+.is-mobile .markdown-reading-view .markdown-preview-view,
+.is-mobile .markdown-source-view.mod-cm6 .cm-scroller {
+  padding-bottom: calc(var(--nemo-dock-h) + var(--nemo-fab) + 48px);
+}
+
+/* ---- Fade dock and pencil out while the drawer is open ---- */
+.is-mobile .mobile-navbar,
+.is-mobile .view-header .view-action[aria-label^="Current view"] {
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+body.is-mobile:has(.workspace-drawer-backdrop) .mobile-navbar,
+body.is-mobile:has(.workspace-drawer-backdrop) .view-header .view-action[aria-label^="Current view"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 
