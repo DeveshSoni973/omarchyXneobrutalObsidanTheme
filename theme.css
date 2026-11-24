@@ -1,0 +1,1076 @@
+/* ============================================
+   OMARCHY X NEOBRUTAL — OBSIDIAN THEME
+   Dark + Light palettes | Style Settings compatible
+   ============================================ */
+
+/* @settings
+
+name: Omarchy X NeoBrutal
+id: nemo-theme-settings
+settings:
+  -
+    id: nemo-typography-heading
+    title: Typography
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: nemo-font-family
+    title: Theme font
+    description: Font used by the interface, editor, and monospace content. The font must be installed on your device.
+    type: variable-text
+    default: "'JetBrainsMono Nerd Font', monospace"
+  -
+    id: nemo-inline-title-size
+    title: Inline title size
+    type: variable-number-slider
+    default: 2.2
+    min: 1.2
+    max: 3.0
+    step: 0.1
+    format: em
+  -
+    id: nemo-h1-size
+    title: Heading 1 size
+    type: variable-number-slider
+    default: 1.8
+    min: 1.0
+    max: 2.8
+    step: 0.1
+    format: em
+  -
+    id: nemo-h2-size
+    title: Heading 2 size
+    type: variable-number-slider
+    default: 1.4
+    min: 1.0
+    max: 2.2
+    step: 0.1
+    format: em
+  -
+    id: nemo-h3-size
+    title: Heading 3 size
+    type: variable-number-slider
+    default: 1.25
+    min: 0.9
+    max: 2.0
+    step: 0.05
+    format: em
+  -
+    id: nemo-h4-size
+    title: Heading 4 size
+    type: variable-number-slider
+    default: 1.1
+    min: 0.9
+    max: 1.8
+    step: 0.05
+    format: em
+  -
+    id: nemo-content-spacing
+    title: Content spacing
+    description: Master spacing scale for paragraphs, headings, and list items. Uses Obsidian's native spacing variables.
+    type: variable-number-slider
+    default: 1.25
+    min: 0.5
+    max: 2.5
+    step: 0.05
+    format: rem
+  -
+    id: nemo-line-height
+    title: Line height
+    type: variable-number-slider
+    default: 1.63
+    min: 1.2
+    max: 2.0
+    step: 0.01
+  -
+    id: nemo-layout-heading
+    title: Layout
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: nemo-corner-radius
+    title: Interface corner radius
+    description: Set to 0 for the original square appearance.
+    type: variable-number-slider
+    default: 0
+    min: 0
+    max: 12
+    step: 1
+    format: px
+  -
+    id: nemo-mobile-heading
+    title: Mobile interface
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: nemo-mobile-navbar-height
+    title: Mobile navigation bar height
+    description: Height of the bottom navigation bar on phones and tablets.
+    type: variable-number-slider
+    default: 48
+    min: 40
+    max: 64
+    step: 1
+    format: px
+  -
+    id: nemo-mobile-navbar-icon-size
+    title: Mobile navigation icon size
+    type: variable-number-slider
+    default: 22
+    min: 16
+    max: 30
+    step: 1
+    format: px
+  -
+    id: nemo-mobile-navbar-full-width
+    title: Full-width square mobile navigation bar
+    description: On phones, make the bottom bar flush with the screen edges instead of floating.
+    type: class-toggle
+    default: true
+  -
+    id: nemo-mobile-touch-target
+    title: Mobile touch target size
+    description: Minimum size for common clickable icons on mobile.
+    type: variable-number-slider
+    default: 44
+    min: 36
+    max: 52
+    step: 2
+    format: px
+  -
+    id: nemo-tag-radius
+    title: Tag corner radius
+    type: variable-number-slider
+    default: 2
+    min: 0
+    max: 12
+    step: 1
+    format: px
+  -
+    id: nemo-sidebar-row-padding
+    title: Sidebar row vertical padding
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 16
+    step: 1
+    format: px
+  -
+    id: nemo-sidebar-row-padding-x
+    title: Sidebar row horizontal padding
+    description: Adds breathing room to the left and right edges of file and folder rows.
+    type: variable-number-slider
+    default: 8
+    min: 0
+    max: 20
+    step: 1
+    format: px
+  -
+    id: nemo-prompt-input-padding
+    title: Command palette input padding
+    description: Inner spacing around the command palette and quick switcher search field.
+    type: variable-number-slider
+    default: 10
+    min: 0
+    max: 20
+    step: 1
+    format: px
+  -
+    id: nemo-prompt-item-padding-y
+    title: Command palette result vertical padding
+    description: Controls the breathing room above and below each result.
+    type: variable-number-slider
+    default: 8
+    min: 2
+    max: 18
+    step: 1
+    format: px
+  -
+    id: nemo-prompt-item-padding-x
+    title: Command palette result horizontal padding
+    description: Controls the left and right spacing inside each result.
+    type: variable-number-slider
+    default: 12
+    min: 2
+    max: 24
+    step: 1
+    format: px
+  -
+    id: nemo-heading-bar-width
+    title: Heading side-bar width
+    type: variable-number-slider
+    default: 4
+    min: 0
+    max: 8
+    step: 1
+    format: px
+  -
+    id: nemo-ui-heading
+    title: Interface details
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: nemo-hide-folder-dots
+    title: Hide top-level folder dots
+    description: Folder dots are shown by default; enable this to hide them.
+    type: class-toggle
+    default: false
+  -
+    id: nemo-show-folder-collapse
+    title: Show top-level folder collapse icons
+    description: Collapse icons are hidden by default; enable this to show them.
+    type: class-toggle
+    default: false
+  -
+    id: nemo-disable-active-line-indicator
+    title: Hide active-line indicator
+    type: class-toggle
+    default: false
+  -
+    id: nemo-disable-heading-bars
+    title: Hide heading side-bars
+    type: class-toggle
+    default: false
+  -
+    id: nemo-readability-heading
+    title: Reading comfort
+    type: heading
+    level: 2
+    collapsed: false
+  -
+    id: nemo-list-indent
+    title: List indentation
+    type: variable-number-slider
+    default: 1.6
+    min: 1.0
+    max: 2.5
+    step: 0.1
+    format: em
+  -
+    id: nemo-modal-border
+    title: Modal and settings-window outline
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#C6F36A'
+    default-light: '#668B27'
+  -
+    id: nemo-colors-heading
+    title: Colors
+    type: heading
+    level: 2
+    collapsed: true
+  -
+    id: nemo-bg-primary
+    title: Editor background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#111111'
+    default-light: '#F5F3EE'
+  -
+    id: nemo-bg-primary-alt
+    title: Alternate editor background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#191919'
+    default-light: '#EFEEE8'
+  -
+    id: nemo-bg-sidebar
+    title: Sidebar background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#171717'
+    default-light: '#EAE8E1'
+  -
+    id: nemo-bg-sidebar-alt
+    title: Secondary background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#202020'
+    default-light: '#E2DFD7'
+  -
+    id: nemo-bg-hover
+    title: Hover background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#292929'
+    default-light: '#DCD9D0'
+  -
+    id: nemo-bg-active-hover
+    title: Active hover background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#343434'
+    default-light: '#D2CFC5'
+  -
+    id: nemo-border
+    title: Border color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#555555'
+    default-light: '#B8B4AA'
+  -
+    id: nemo-border-hover
+    title: Border hover color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#D94D91'
+  -
+    id: nemo-border-focus
+    title: Focus border color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#C6F36A'
+    default-light: '#668B27'
+  -
+    id: nemo-text
+    title: Main text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F2F0E8'
+    default-light: '#242424'
+  -
+    id: nemo-text-muted
+    title: Muted text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#A1A1AA'
+    default-light: '#777777'
+  -
+    id: nemo-text-faint
+    title: Faint text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#777777'
+    default-light: '#99968D'
+  -
+    id: nemo-text-accent
+    title: Accent text and links
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#C6F36A'
+    default-light: '#668B27'
+  -
+    id: nemo-text-accent-hover
+    title: Accent hover text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#D94D91'
+  -
+    id: nemo-inline-title
+    title: Inline title text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F2F0E8'
+    default-light: '#242424'
+  -
+    id: nemo-heading-1
+    title: Heading 1 color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#C6F36A'
+    default-light: '#668B27'
+  -
+    id: nemo-heading-other
+    title: Heading 2–6 color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#FF9F43'
+    default-light: '#C46A20'
+  -
+    id: nemo-link-hover
+    title: Link hover color
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#D94D91'
+  -
+    id: nemo-tag-text
+    title: Tag text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#C43D80'
+  -
+    id: nemo-tag-bg
+    title: Tag background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#252525'
+    default-light: '#EAE2E5'
+  -
+    id: nemo-tag-bg-hover
+    title: Tag hover background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#3A2A18'
+    default-light: '#F2DDE7'
+  -
+    id: nemo-quote-border
+    title: Quote border
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#D94D91'
+  -
+    id: nemo-quote-bg
+    title: Quote background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#191919'
+    default-light: '#EFEEE8'
+  -
+    id: nemo-interactive-accent
+    title: Interactive accent
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F37DB7'
+    default-light: '#D94D91'
+  -
+    id: nemo-interactive-accent-hover
+    title: Interactive accent hover
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#F593C6'
+    default-light: '#C43D80'
+  -
+    id: nemo-text-on-accent
+    title: Text on interactive accent
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#111111'
+    default-light: '#FFFFFF'
+  -
+    id: nemo-nav-active-bg
+    title: Active sidebar background
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#C6F36A'
+    default-light: '#668B27'
+  -
+    id: nemo-nav-active-text
+    title: Active sidebar text
+    type: variable-themed-color
+    format: hex
+    opacity: false
+    default-dark: '#111111'
+    default-light: '#FFFFFF'
+
+*/
+
+
+/* ============================================
+   1. SHARED VARIABLES
+   ============================================ */
+
+body {
+  /* Font families */
+  --font-interface-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
+  --font-text-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
+  --font-monospace-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
+
+  --inline-title-font: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
+  --inline-title-size: var(--nemo-inline-title-size, 2.2em);
+  --inline-title-weight: 800;
+
+  /* Heading sizes and weights */
+  --h1-size: var(--nemo-h1-size, 1.8em);
+  --h1-weight: 800;
+  --h2-size: var(--nemo-h2-size, 1.4em);
+  --h2-weight: 700;
+  --h3-size: var(--nemo-h3-size, 1.25em);
+  --h3-weight: 700;
+  --h4-size: var(--nemo-h4-size, 1.1em);
+  --h4-weight: 700;
+
+  /* Native Obsidian content spacing variables.
+     One master control scales paragraph, heading, and list spacing. */
+  --p-spacing: var(--nemo-content-spacing, 1.25rem);
+  --heading-spacing: calc(var(--nemo-content-spacing, 1.25rem) * 1.28);
+  --list-spacing: calc(var(--nemo-content-spacing, 1.25rem) * 0.30);
+  --list-indent: var(--nemo-list-indent, 1.6em);
+  --list-indent-editing: var(--nemo-list-indent, 1.6em);
+  --list-indent-source: var(--nemo-list-indent, 1.6em);
+  --line-height-normal: var(--nemo-line-height, 1.63);
+
+  /* Navigation.
+     FIX: set Obsidian's own padding variable instead of overriding
+     padding with !important. The left value keeps room for the collapse
+     arrow, so with the default X of 8px it equals Obsidian's native 24px.
+     Order: top / right / bottom / left. */
+  --nav-item-padding:
+    var(--nemo-sidebar-row-padding, 8px)
+    var(--nemo-sidebar-row-padding-x, 8px)
+    var(--nemo-sidebar-row-padding, 8px)
+    calc(var(--size-4-6) - var(--size-4-2) + var(--nemo-sidebar-row-padding-x, 8px));
+  --nav-indentation-guide-width: 2px;
+  /* Indent per nesting level. Documented names are -start (not -left);
+     my earlier -left variable did nothing. Raise/lower to taste. */
+  --nav-item-children-padding-start: 10px;
+
+  /* Remove Obsidian's own tab outlines (lines under the tab bar,
+     around the active tab, and between tabs). */
+  --tab-outline-width: 0px;
+  --tab-outline-color: transparent;
+
+  /* Shape */
+  --radius-s: var(--nemo-corner-radius, 0px);
+  --radius-m: var(--nemo-corner-radius, 0px);
+  --radius-l: var(--nemo-corner-radius, 0px);
+  --radius-xl: var(--nemo-corner-radius, 0px);
+  --clickable-icon-radius: var(--nemo-corner-radius, 0px);
+  --checkbox-radius: var(--nemo-corner-radius, 0px);
+  --tag-radius: var(--nemo-tag-radius, 2px);
+  --tab-radius: var(--nemo-corner-radius, 0px);
+  --tab-radius-active: var(--nemo-corner-radius, 0px);
+  --tab-curve: var(--nemo-corner-radius, 0px);
+
+  --blockquote-border-thickness: 2px;
+
+  /* Remove Obsidian pane dividers */
+  --divider-width: 0px;
+  --divider-width-hover: 0px;
+  --divider-color: transparent;
+}
+
+
+/* ============================================
+   2. DARK PALETTE
+   ============================================ */
+
+.theme-dark {
+  --accent-h: 330;
+  --accent-s: 83%;
+  --accent-l: 72%;
+
+  --background-primary: var(--nemo-bg-primary, #111111);
+  --background-primary-alt: var(--nemo-bg-primary-alt, #191919);
+  --background-secondary: var(--nemo-bg-sidebar, #171717);
+  --background-secondary-alt: var(--nemo-bg-sidebar-alt, #202020);
+  --background-modifier-hover: var(--nemo-bg-hover, #292929);
+  --background-modifier-active-hover: var(--nemo-bg-active-hover, #343434);
+
+  --background-modifier-border: var(--nemo-border, #555555);
+  --background-modifier-border-hover: var(--nemo-border-hover, #F37DB7);
+  --background-modifier-border-focus: var(--nemo-border-focus, #C6F36A);
+  --modal-border-color: var(--nemo-modal-border, #C6F36A);
+
+  --interactive-normal: var(--background-secondary-alt);
+  --interactive-hover: var(--background-modifier-hover);
+  --interactive-accent: var(--nemo-interactive-accent, #F37DB7);
+  --interactive-accent-hover: var(--nemo-interactive-accent-hover, #F593C6);
+  --text-on-accent: var(--nemo-text-on-accent, #111111);
+
+  --text-normal: var(--nemo-text, #F2F0E8);
+  --text-muted: var(--nemo-text-muted, #A1A1AA);
+  --text-faint: var(--nemo-text-faint, #777777);
+  --text-accent: var(--nemo-text-accent, #C6F36A);
+  --text-accent-hover: var(--nemo-text-accent-hover, #F37DB7);
+  --inline-title-color: var(--nemo-inline-title, #F2F0E8);
+
+  --h1-color: var(--nemo-heading-1, #C6F36A);
+  --h2-color: var(--nemo-heading-other, #FF9F43);
+  --h3-color: var(--nemo-heading-other, #FF9F43);
+  --h4-color: var(--nemo-heading-other, #FF9F43);
+  --h5-color: var(--nemo-heading-other, #FF9F43);
+  --h6-color: var(--nemo-heading-other, #FF9F43);
+
+  --link-color: var(--text-accent);
+  --link-color-hover: var(--nemo-link-hover, #F37DB7);
+  --link-external-color: var(--text-accent);
+
+  --tag-color: var(--nemo-tag-text, #F37DB7);
+  --tag-background: var(--nemo-tag-bg, #252525);
+  --tag-background-hover: var(--nemo-tag-bg-hover, #3A2A18);
+
+  --blockquote-border-color: var(--nemo-quote-border, #F37DB7);
+  --blockquote-background-color: var(--nemo-quote-bg, #191919);
+
+  --nav-indentation-guide-color: var(--nemo-border, #555555);
+}
+
+
+/* ============================================
+   3. LIGHT PALETTE
+   ============================================ */
+
+.theme-light {
+  --accent-h: 330;
+  --accent-s: 65%;
+  --accent-l: 58%;
+
+  --background-primary: var(--nemo-bg-primary, #F5F3EE);
+  --background-primary-alt: var(--nemo-bg-primary-alt, #EFEEE8);
+  --background-secondary: var(--nemo-bg-sidebar, #EAE8E1);
+  --background-secondary-alt: var(--nemo-bg-sidebar-alt, #E2DFD7);
+  --background-modifier-hover: var(--nemo-bg-hover, #DCD9D0);
+  --background-modifier-active-hover: var(--nemo-bg-active-hover, #D2CFC5);
+
+  --background-modifier-border: var(--nemo-border, #B8B4AA);
+  --background-modifier-border-hover: var(--nemo-border-hover, #D94D91);
+  --background-modifier-border-focus: var(--nemo-border-focus, #668B27);
+  --modal-border-color: var(--nemo-modal-border, #668B27);
+
+  --interactive-normal: var(--background-secondary-alt);
+  --interactive-hover: var(--background-modifier-hover);
+  --interactive-accent: var(--nemo-interactive-accent, #D94D91);
+  --interactive-accent-hover: var(--nemo-interactive-accent-hover, #C43D80);
+  --text-on-accent: var(--nemo-text-on-accent, #FFFFFF);
+
+  --text-normal: var(--nemo-text, #242424);
+  --text-muted: var(--nemo-text-muted, #777777);
+  --text-faint: var(--nemo-text-faint, #99968D);
+  --text-accent: var(--nemo-text-accent, #668B27);
+  --text-accent-hover: var(--nemo-text-accent-hover, #D94D91);
+  --inline-title-color: var(--nemo-inline-title, #242424);
+
+  --h1-color: var(--nemo-heading-1, #668B27);
+  --h2-color: var(--nemo-heading-other, #C46A20);
+  --h3-color: var(--nemo-heading-other, #C46A20);
+  --h4-color: var(--nemo-heading-other, #C46A20);
+  --h5-color: var(--nemo-heading-other, #C46A20);
+  --h6-color: var(--nemo-heading-other, #C46A20);
+
+  --link-color: var(--text-accent);
+  --link-color-hover: var(--nemo-link-hover, #D94D91);
+  --link-external-color: var(--text-accent);
+
+  --tag-color: var(--nemo-tag-text, #C43D80);
+  --tag-background: var(--nemo-tag-bg, #EAE2E5);
+  --tag-background-hover: var(--nemo-tag-bg-hover, #F2DDE7);
+
+  --blockquote-border-color: var(--nemo-quote-border, #D94D91);
+  --blockquote-background-color: var(--nemo-quote-bg, #EFEEE8);
+
+  --nav-indentation-guide-color: var(--nemo-border, #B8B4AA);
+}
+
+
+/* ============================================
+   4. TAB GEOMETRY
+   ============================================ */
+
+/* These pseudo-elements draw the vertical dividers/curves between tabs. */
+.workspace-tab-header-inner::before,
+.workspace-tab-header-inner::after,
+.workspace-tab-header::before,
+.workspace-tab-header::after {
+  display: none !important;
+}
+
+.workspace-split.mod-root .workspace-tab-header-container {
+  background-image: linear-gradient(var(--background-modifier-border), var(--background-modifier-border));
+  background-size: 100% 1px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  padding: 0 !important;
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+}
+
+.workspace-tab-header-container-inner {
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  align-items: stretch !important;
+}
+
+.workspace-tab-header {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.workspace-tab-header-inner {
+  height: 100% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+/* Active tab: outlined on its outer edges only (left, top, right).
+   Its bottom edge is open; its opaque background sits on top of the tab bar's
+   bottom line (drawn below), so the tab and page merge with no line between. */
+.workspace-split.mod-root .workspace-tab-header.is-active {
+  position: relative;
+  z-index: 5 !important;
+  height: 100% !important;
+  border: 1px solid var(--background-modifier-border) !important;
+  border-bottom: none !important;
+  background-color: var(--background-primary) !important;
+  box-shadow: none !important;
+}
+
+
+/* ============================================
+   5. WORKSPACE AND SIDEBAR SURFACES
+   ============================================ */
+
+.workspace-ribbon,
+.workspace-tab-header-container,
+.nav-header {
+  background-color: var(--background-secondary);
+}
+
+.workspace-split.mod-root .workspace-leaf-content,
+.workspace-split.mod-root .view-content {
+  background-color: var(--background-primary);
+}
+
+.mod-left-split .workspace-leaf-content,
+.mod-right-split .workspace-leaf-content,
+.mod-left-split .view-content,
+.mod-right-split .view-content,
+.mod-left-split .nav-files-container,
+.mod-right-split .nav-files-container,
+.mod-left-split .workspace-tabs,
+.mod-right-split .workspace-tabs,
+.mod-left-split .workspace-tab-container,
+.mod-right-split .workspace-tab-container,
+.mod-left-split .workspace-tab-header-container,
+.mod-right-split .workspace-tab-header-container,
+.mod-left-split .nav-header,
+.mod-right-split .nav-header {
+  background-color: var(--background-secondary) !important;
+}
+
+/* Sidebars, ribbon, tab bar, resize handles: no borders. */
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split,
+.workspace-ribbon,
+.workspace-tab-header-container,
+.nav-header,
+.workspace-leaf-resize-handle {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.workspace-split.mod-root .workspace-tab-container {
+  border: 1px solid var(--background-modifier-border) !important;
+  border-top: none !important;
+  background-color: var(--background-primary) !important;
+}
+
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split,
+.workspace-split.mod-root,
+.workspace-split.mod-vertical,
+.workspace-split.mod-horizontal {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+
+/* ============================================
+   6. SIDEBAR NAVIGATION
+   (row padding comes from --nav-item-padding in section 1)
+   ============================================ */
+
+.nav-folder > .nav-folder-title {
+  font-weight: 700;
+}
+
+/* Vault root row: sit the dot on top of the guide line so the first
+   level (World Building) reads as a child, not a sibling. */
+.nav-files-container > div > .nav-folder > .nav-folder-title {
+  padding-inline-start: calc(var(--nemo-sidebar-row-padding-x, 8px) + 4px) !important;
+}
+
+.nav-file-title:hover,
+.nav-folder-title:hover {
+  background-color: var(--background-modifier-hover);
+}
+
+.nav-file-title.is-active,
+.nav-folder-title.is-active {
+  background-color: var(--nemo-nav-active-bg, var(--text-accent)) !important;
+  color: var(--nemo-nav-active-text, var(--background-primary)) !important;
+  font-weight: 600;
+}
+
+.nav-file-title.is-active .nav-file-title-content,
+.nav-folder-title.is-active .nav-folder-title-content {
+  color: var(--nemo-nav-active-text, var(--background-primary)) !important;
+}
+
+
+/* ============================================
+   7. FOLDER DOTS AND COLLAPSE ICONS
+   ============================================ */
+
+.nav-files-container > div > .nav-folder > .nav-folder-title {
+  --nemo-folder-dot: #E5484D;
+}
+
+.nav-files-container > div > .nav-folder:nth-child(2) > .nav-folder-title {
+  --nemo-folder-dot: #FF9F43;
+}
+
+.nav-files-container > div > .nav-folder:nth-child(3) > .nav-folder-title {
+  --nemo-folder-dot: #C6F36A;
+}
+
+.nav-files-container > div > .nav-folder:nth-child(4) > .nav-folder-title {
+  --nemo-folder-dot: #F37DB7;
+}
+
+.nav-files-container > div > .nav-folder:nth-child(5) > .nav-folder-title {
+  --nemo-folder-dot: #6AB7F3;
+}
+
+.nav-files-container > div > .nav-folder > .nav-folder-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  background: var(--nemo-folder-dot);
+}
+
+.nav-files-container > div > .nav-folder > .nav-folder-title > .collapse-icon {
+  display: none;
+}
+
+body.nemo-show-folder-collapse .nav-files-container > div > .nav-folder > .nav-folder-title > .collapse-icon {
+  display: revert;
+}
+
+body.nemo-hide-folder-dots .nav-files-container > div > .nav-folder > .nav-folder-title::before {
+  display: none;
+}
+
+
+/* ============================================
+   8. HEADING SIDE-BARS
+   ============================================ */
+
+.markdown-source-view.mod-cm6 .cm-header-1,
+.markdown-source-view.mod-cm6 .cm-header-2,
+.markdown-source-view.mod-cm6 .cm-header-3,
+.markdown-source-view.mod-cm6 .cm-header-4,
+.markdown-source-view.mod-cm6 .cm-header-5,
+.markdown-source-view.mod-cm6 .cm-header-6,
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6 {
+  border-left: var(--nemo-heading-bar-width, 4px) solid currentColor;
+  padding-left: 0.4em;
+}
+
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-1,
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-2,
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-3,
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-4,
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-5,
+body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-6,
+body.nemo-disable-heading-bars .markdown-rendered h1,
+body.nemo-disable-heading-bars .markdown-rendered h2,
+body.nemo-disable-heading-bars .markdown-rendered h3,
+body.nemo-disable-heading-bars .markdown-rendered h4,
+body.nemo-disable-heading-bars .markdown-rendered h5,
+body.nemo-disable-heading-bars .markdown-rendered h6 {
+  border-left: 0;
+  padding-left: 0;
+}
+
+
+/* ============================================
+   9. ACTIVE LINE INDICATOR
+   ============================================ */
+
+.markdown-source-view.mod-cm6 .cm-active.cm-line {
+  position: relative;
+}
+
+.markdown-source-view.mod-cm6 .cm-active.cm-line::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 15%;
+  height: 70%;
+  width: 4px;
+  background: var(--interactive-accent);
+}
+
+body.nemo-disable-active-line-indicator .markdown-source-view.mod-cm6 .cm-active.cm-line::before {
+  display: none;
+}
+
+
+/* ============================================
+   10. METADATA
+   ============================================ */
+
+.metadata-property-icon {
+  display: none !important;
+}
+
+.metadata-property {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  min-height: 0;
+}
+
+
+/* ============================================
+   11. STATUS BAR
+   ============================================ */
+
+.status-bar {
+  border-radius: var(--radius-s);
+  margin: 0 !important;
+}
+
+
+/* ============================================
+   12. READING COMFORT
+   ============================================ */
+
+.markdown-rendered blockquote,
+.markdown-rendered .callout {
+  padding: 0.65em 0.9em;
+}
+
+/* Preserve the theme's line-height in Live Preview list rows. */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-list-line {
+  line-height: var(--line-height-normal);
+}
+
+
+/* ============================================
+   13. MOBILE
+   ============================================ */
+
+.is-mobile .workspace-drawer,
+.is-mobile .workspace-drawer-inner,
+.is-mobile .workspace-drawer-header,
+.is-mobile .workspace-drawer-tab-container,
+.is-mobile .workspace-drawer .workspace-leaf,
+.is-mobile .workspace-drawer .workspace-leaf-content,
+.is-mobile .workspace-drawer .view-content {
+  background-color: var(--background-secondary);
+}
+
+.is-mobile .view-header {
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+}
+
+/* Bottom navigation: native positioning kept; restyle surface only.
+   FIX: --navbar-height / --icon-size now set on .mobile-navbar,
+   where Obsidian reads them. */
+.is-mobile .mobile-navbar {
+  --navbar-height: var(--nemo-mobile-navbar-height, 48px);
+  --icon-size: var(--nemo-mobile-navbar-icon-size, 22px);
+  --icon-color: var(--text-normal);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  box-shadow: none !important;
+  color: var(--text-normal);
+}
+
+.is-mobile .mobile-navbar .clickable-icon {
+  color: var(--text-normal);
+}
+
+/* Optional full-width phone bar. */
+body.nemo-mobile-navbar-full-width.is-phone {
+  --navbar-bottom-offset: 0px;
+}
+
+body.nemo-mobile-navbar-full-width.is-phone .mobile-navbar {
+  width: 100%;
+  max-width: none;
+  left: 0;
+  right: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+/* Touch targets only where needed (not the bottom navbar). */
+.is-mobile .view-header .clickable-icon {
+  min-width: var(--nemo-mobile-touch-target, 44px);
+  min-height: var(--nemo-mobile-touch-target, 44px);
+}
+
+.is-mobile .suggestion-container,
+.is-mobile .menu {
+  border-color: var(--modal-border-color, var(--background-modifier-border));
+}
+
+.is-mobile .markdown-rendered,
+.is-mobile .markdown-source-view {
+  line-height: var(--line-height-normal);
+}
+
+
+/* ============================================
+   14. COMMAND PALETTE & QUICK SWITCHER
+   (same rules apply on desktop and mobile)
+   ============================================ */
+
+.prompt {
+  --prompt-border-color: var(--modal-border-color, var(--background-modifier-border));
+  --prompt-border-width: 1px;
+  --prompt-radius: var(--radius-m);
+}
+
+.prompt .prompt-input-container {
+  margin: 8px !important;
+}
+
+.prompt .prompt-input-container input.prompt-input {
+  padding: var(--nemo-prompt-input-padding, 10px) !important;
+  border-radius: var(--radius-s);
+}
+
+.prompt .prompt-results {
+  padding: 4px 8px 8px !important;
+}
+
+.prompt .prompt-results .suggestion-item {
+  padding:
+    var(--nemo-prompt-item-padding-y, 8px)
+    var(--nemo-prompt-item-padding-x, 12px) !important;
+  margin: 2px 0 !important;
+  border-radius: var(--radius-s);
+}
