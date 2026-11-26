@@ -1,6 +1,27 @@
 /* ============================================
    OMARCHY X NEOBRUTAL — OBSIDIAN THEME
    Dark + Light palettes | Style Settings compatible
+
+   Structure:
+   1. Style Settings
+   2. Shared variables
+   3. Dark and light palettes
+   4. Tabs
+   5. Workspace surfaces
+   6. Sidebar navigation
+   7. Folder accents
+   8. Heading bars
+   9. Active-line indicator
+  10. Metadata and status bar
+  11. Reading comfort
+  12. Mobile
+  13. Command palette and quick switcher
+
+   Principles:
+   - Prefer Obsidian CSS variables over structural overrides.
+   - Keep selectors scoped and low-specificity.
+   - Avoid !important unless a plugin/app inline style requires it.
+   - Do not force workspace split/ribbon visibility or geometry.
    ============================================ */
 
 /* @settings
@@ -491,13 +512,12 @@ settings:
 
 */
 
-
 /* ============================================
    1. SHARED VARIABLES
    ============================================ */
 
 body {
-  /* Font families */
+  /* Typography */
   --font-interface-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
   --font-text-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
   --font-monospace-theme: var(--nemo-font-family, 'JetBrainsMono Nerd Font', monospace);
@@ -506,7 +526,6 @@ body {
   --inline-title-size: var(--nemo-inline-title-size, 2.2em);
   --inline-title-weight: 800;
 
-  /* Heading sizes and weights */
   --h1-size: var(--nemo-h1-size, 1.8em);
   --h1-weight: 800;
   --h2-size: var(--nemo-h2-size, 1.4em);
@@ -516,8 +535,7 @@ body {
   --h4-size: var(--nemo-h4-size, 1.1em);
   --h4-weight: 700;
 
-  /* Native Obsidian content spacing variables.
-     One master control scales paragraph, heading, and list spacing. */
+  /* Content rhythm */
   --p-spacing: var(--nemo-content-spacing, 1.25rem);
   --heading-spacing: calc(var(--nemo-content-spacing, 1.25rem) * 1.28);
   --list-spacing: calc(var(--nemo-content-spacing, 1.25rem) * 0.30);
@@ -526,25 +544,25 @@ body {
   --list-indent-source: var(--nemo-list-indent, 1.6em);
   --line-height-normal: var(--nemo-line-height, 1.63);
 
-  /* Navigation.
-     FIX: set Obsidian's own padding variable instead of overriding
-     padding with !important. The left value keeps room for the collapse
-     arrow, so with the default X of 8px it equals Obsidian's native 24px.
-     Order: top / right / bottom / left. */
+  /* File explorer spacing */
   --nav-item-padding:
     var(--nemo-sidebar-row-padding, 8px)
     var(--nemo-sidebar-row-padding-x, 8px)
     var(--nemo-sidebar-row-padding, 8px)
     calc(var(--size-4-6) - var(--size-4-2) + var(--nemo-sidebar-row-padding-x, 8px));
   --nav-indentation-guide-width: 2px;
-  /* Indent per nesting level. Documented names are -start (not -left);
-     my earlier -left variable did nothing. Raise/lower to taste. */
   --nav-item-children-padding-start: 10px;
+  --nav-item-background-active: var(--nemo-nav-active-bg, var(--text-accent));
+  --nav-item-color-active: var(--nemo-nav-active-text, var(--background-primary));
+  --nav-item-weight-active: 600;
 
-  /* Remove Obsidian's own tab outlines (lines under the tab bar,
-     around the active tab, and between tabs). */
+  /* Tabs: root workspace overrides the outline locally. */
   --tab-outline-width: 0px;
   --tab-outline-color: transparent;
+  --tab-divider-color: transparent;
+  --tab-curve: var(--nemo-corner-radius, 0px);
+  --tab-radius: var(--nemo-corner-radius, 0px);
+  --tab-radius-active: var(--nemo-corner-radius, 0px);
 
   /* Shape */
   --radius-s: var(--nemo-corner-radius, 0px);
@@ -554,18 +572,21 @@ body {
   --clickable-icon-radius: var(--nemo-corner-radius, 0px);
   --checkbox-radius: var(--nemo-corner-radius, 0px);
   --tag-radius: var(--nemo-tag-radius, 2px);
-  --tab-radius: var(--nemo-corner-radius, 0px);
-  --tab-radius-active: var(--nemo-corner-radius, 0px);
-  --tab-curve: var(--nemo-corner-radius, 0px);
+  --input-radius: var(--nemo-corner-radius, 0px);
+  --pill-radius: var(--nemo-corner-radius, 0px);
 
+  /* Quotes and modals */
   --blockquote-border-thickness: 2px;
+  --modal-border-width: 1px;
+  --prompt-border-color: var(--modal-border-color);
+  --prompt-border-width: var(--modal-border-width);
 
-  /* Remove Obsidian pane dividers */
-  --divider-width: 0px;
-  --divider-width-hover: 0px;
+  /* Pane dividers: invisible at rest, interactive on hover */
   --divider-color: transparent;
+  --divider-color-hover: var(--background-modifier-border-hover);
+  --divider-width: 1px;
+  --divider-width-hover: 3px;
 }
-
 
 /* ============================================
    2. DARK PALETTE
@@ -587,6 +608,10 @@ body {
   --background-modifier-border-hover: var(--nemo-border-hover, #F37DB7);
   --background-modifier-border-focus: var(--nemo-border-focus, #C6F36A);
   --modal-border-color: var(--nemo-modal-border, #C6F36A);
+
+  --ribbon-background: var(--background-secondary);
+  --tab-container-background: var(--background-secondary);
+  --tab-background-active: var(--background-primary);
 
   --interactive-normal: var(--background-secondary-alt);
   --interactive-hover: var(--background-modifier-hover);
@@ -618,10 +643,8 @@ body {
 
   --blockquote-border-color: var(--nemo-quote-border, #F37DB7);
   --blockquote-background-color: var(--nemo-quote-bg, #191919);
-
   --nav-indentation-guide-color: var(--nemo-border, #555555);
 }
-
 
 /* ============================================
    3. LIGHT PALETTE
@@ -643,6 +666,10 @@ body {
   --background-modifier-border-hover: var(--nemo-border-hover, #D94D91);
   --background-modifier-border-focus: var(--nemo-border-focus, #668B27);
   --modal-border-color: var(--nemo-modal-border, #668B27);
+
+  --ribbon-background: var(--background-secondary);
+  --tab-container-background: var(--background-secondary);
+  --tab-background-active: var(--background-primary);
 
   --interactive-normal: var(--background-secondary-alt);
   --interactive-hover: var(--background-modifier-hover);
@@ -674,82 +701,110 @@ body {
 
   --blockquote-border-color: var(--nemo-quote-border, #D94D91);
   --blockquote-background-color: var(--nemo-quote-bg, #EFEEE8);
-
   --nav-indentation-guide-color: var(--nemo-border, #B8B4AA);
 }
 
-
 /* ============================================
-   4. TAB GEOMETRY
+   4. ROOT TAB STRIP + NOTE FRAME
+   The selected root tab and its note pane form one connected frame.
+   Sidebar tab groups are deliberately excluded.
    ============================================ */
 
-/* These pseudo-elements draw the vertical dividers/curves between tabs. */
-.workspace-tab-header-inner::before,
-.workspace-tab-header-inner::after,
-.workspace-tab-header::before,
-.workspace-tab-header::after {
-  display: none !important;
+/* Only the main/root workspace gets the framed-tab geometry.
+   The left and right sidebars retain Obsidian's native tab treatment. */
+.workspace-split.mod-root {
+  --tab-outline-width: 1px;
+  --tab-outline-color: var(--background-modifier-border);
+  --tab-divider-color: transparent;
+  --tab-container-background: var(--background-secondary);
+  --tab-background-active: var(--background-primary);
+  --nemo-pane-outline-width: 1px;
+  --nemo-pane-outline-color: var(--background-modifier-border);
 }
 
+/* Keep the full tab strip on the secondary surface and remove its default
+   start padding so the first tab's left border aligns with the note frame.
+   Obsidian draws its bottom separator from --tab-outline-width / --tab-outline-color. */
 .workspace-split.mod-root .workspace-tab-header-container {
-  background-image: linear-gradient(var(--background-modifier-border), var(--background-modifier-border));
-  background-size: 100% 1px;
-  background-position: left bottom;
-  background-repeat: no-repeat;
-  padding: 0 !important;
-  overflow: visible !important;
-  position: relative;
-  z-index: 2;
+  background-color: var(--tab-container-background);
+  padding-inline-start: 0;
 }
 
-.workspace-tab-header-container-inner {
-  margin: 0 !important;
-  padding: 0 !important;
-  gap: 0 !important;
-  align-items: stretch !important;
+/* Remove the default inset around root tabs so the first active tab's
+   left edge lines up with the note pane's left frame. This is scoped to
+   the main workspace; sidebar tab geometry remains native. */
+.workspace-split.mod-root .workspace-tab-header-container-inner {
+  align-items: stretch;
+  gap: 0;
+  margin: 0 0 -1px;
+  padding: 0;
 }
 
-.workspace-tab-header {
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.workspace-split.mod-root .workspace-tab-header {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
 }
 
-.workspace-tab-header-inner {
-  height: 100% !important;
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+.workspace-split.mod-root .workspace-tab-header-inner {
+  height: 100%;
+  padding-inline: 15px;
 }
 
-/* Active tab: outlined on its outer edges only (left, top, right).
-   Its bottom edge is open; its opaque background sits on top of the tab bar's
-   bottom line (drawn below), so the tab and page merge with no line between. */
+/* The selected tab is the top edge of the note frame.
+   No bottom border is drawn here so the left/right borders meet the note
+   frame cleanly without a corner miter, while the tab background covers the
+   tab strip's bottom separator. */
 .workspace-split.mod-root .workspace-tab-header.is-active {
   position: relative;
-  z-index: 5 !important;
-  height: 100% !important;
-  border: 1px solid var(--background-modifier-border) !important;
-  border-bottom: none !important;
-  background-color: var(--background-primary) !important;
-  box-shadow: none !important;
+  z-index: 2;
+  margin-bottom: 0;
+  border-top: var(--nemo-pane-outline-width) solid var(--nemo-pane-outline-color);
+  border-inline: var(--nemo-pane-outline-width) solid var(--nemo-pane-outline-color);
+  border-bottom: 0;
+  border-radius: 0;
+  background-color: var(--background-primary);
+  box-shadow: none;
+  color: var(--text-normal);
 }
 
-
-/* ============================================
-   5. WORKSPACE AND SIDEBAR SURFACES
-   ============================================ */
-
-.workspace-ribbon,
-.workspace-tab-header-container,
-.nav-header {
-  background-color: var(--background-secondary);
+/* The note container supplies the remaining three sides of the frame:
+   left, right, and bottom. There is intentionally no top border here. */
+.workspace-split.mod-root .workspace-tab-container {
+  box-sizing: border-box;
+  border-inline: var(--nemo-pane-outline-width) solid var(--nemo-pane-outline-color);
+  border-bottom: var(--nemo-pane-outline-width) solid var(--nemo-pane-outline-color);
+  border-top: 0;
+  background-color: var(--background-primary);
 }
 
+/* Main note surface */
 .workspace-split.mod-root .workspace-leaf-content,
 .workspace-split.mod-root .view-content {
   background-color: var(--background-primary);
 }
 
+/* Square tab shoulders; do not touch the sidebars' tab controls. */
+.workspace-split.mod-root .workspace-tab-header::before,
+.workspace-split.mod-root .workspace-tab-header::after,
+.workspace-split.mod-root .workspace-tab-header-inner::before,
+.workspace-split.mod-root .workspace-tab-header-inner::after {
+  display: none;
+}
+
+/* ============================================
+   5. SIDEBAR AND RIBBON SURFACES
+   Color only. No borders, visibility, sizing, or positioning rules.
+   ============================================ */
+
+.workspace-ribbon,
+.nav-header {
+  background-color: var(--background-secondary);
+}
+
+.mod-left-split,
+.mod-right-split,
 .mod-left-split .workspace-leaf-content,
 .mod-right-split .workspace-leaf-content,
 .mod-left-split .view-content,
@@ -764,49 +819,23 @@ body {
 .mod-right-split .workspace-tab-header-container,
 .mod-left-split .nav-header,
 .mod-right-split .nav-header {
-  background-color: var(--background-secondary) !important;
+  background-color: var(--background-secondary);
 }
 
-/* Sidebars, ribbon, tab bar, resize handles: no borders. */
-.workspace-split.mod-left-split,
-.workspace-split.mod-right-split,
-.workspace-ribbon,
-.workspace-tab-header-container,
-.nav-header,
-.workspace-leaf-resize-handle {
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.workspace-split.mod-root .workspace-tab-container {
-  border: 1px solid var(--background-modifier-border) !important;
-  border-top: none !important;
-  background-color: var(--background-primary) !important;
-}
-
-.workspace-split.mod-left-split,
-.workspace-split.mod-right-split,
-.workspace-split.mod-root,
-.workspace-split.mod-vertical,
-.workspace-split.mod-horizontal {
-  border-left: none !important;
-  border-right: none !important;
-}
-
+/* Pane divider appearance is controlled through --divider-* variables.
+   Do not style .workspace-split borders: Obsidian owns split geometry. */
 
 /* ============================================
    6. SIDEBAR NAVIGATION
-   (row padding comes from --nav-item-padding in section 1)
    ============================================ */
 
 .nav-folder > .nav-folder-title {
   font-weight: 700;
 }
 
-/* Vault root row: sit the dot on top of the guide line so the first
-   level (World Building) reads as a child, not a sibling. */
+/* Vault root folder row */
 .nav-files-container > div > .nav-folder > .nav-folder-title {
-  padding-inline-start: calc(var(--nemo-sidebar-row-padding-x, 8px) + 4px) !important;
+  padding-inline-start: calc(var(--nemo-sidebar-row-padding-x, 8px) + 4px);
 }
 
 .nav-file-title:hover,
@@ -814,21 +843,28 @@ body {
   background-color: var(--background-modifier-hover);
 }
 
+.modal.mod-settings .vertical-tab-header {
+  --nav-item-background-active: var(--nemo-nav-active-bg, var(--text-accent));
+  --nav-item-color-active: var(--nemo-nav-active-text, var(--background-primary));
+}
+
 .nav-file-title.is-active,
-.nav-folder-title.is-active {
-  background-color: var(--nemo-nav-active-bg, var(--text-accent)) !important;
-  color: var(--nemo-nav-active-text, var(--background-primary)) !important;
-  font-weight: 600;
+.nav-folder-title.is-active,
+.modal.mod-settings .vertical-tab-header .vertical-tab-nav-item.is-active,
+.modal.mod-settings .vertical-tab-header .vertical-tab-nav-item.is-active:hover {
+  background-color: var(--nemo-nav-active-bg, var(--text-accent));
+  color: var(--nemo-nav-active-text, var(--background-primary));
+  font-weight: var(--nav-item-weight-active);
 }
 
 .nav-file-title.is-active .nav-file-title-content,
-.nav-folder-title.is-active .nav-folder-title-content {
-  color: var(--nemo-nav-active-text, var(--background-primary)) !important;
+.nav-folder-title.is-active .nav-folder-title-content,
+.modal.mod-settings .vertical-tab-header .vertical-tab-nav-item.is-active .vertical-tab-nav-item-icon {
+  color: var(--nemo-nav-active-text, var(--background-primary));
 }
 
-
 /* ============================================
-   7. FOLDER DOTS AND COLLAPSE ICONS
+   7. TOP-LEVEL FOLDER DOTS AND COLLAPSE ICONS
    ============================================ */
 
 .nav-files-container > div > .nav-folder > .nav-folder-title {
@@ -856,8 +892,8 @@ body {
   display: inline-block;
   width: 8px;
   height: 8px;
-  margin-right: 10px;
-  background: var(--nemo-folder-dot);
+  margin-inline-end: 10px;
+  background-color: var(--nemo-folder-dot);
 }
 
 .nav-files-container > div > .nav-folder > .nav-folder-title > .collapse-icon {
@@ -871,7 +907,6 @@ body.nemo-show-folder-collapse .nav-files-container > div > .nav-folder > .nav-f
 body.nemo-hide-folder-dots .nav-files-container > div > .nav-folder > .nav-folder-title::before {
   display: none;
 }
-
 
 /* ============================================
    8. HEADING SIDE-BARS
@@ -889,8 +924,8 @@ body.nemo-hide-folder-dots .nav-files-container > div > .nav-folder > .nav-folde
 .markdown-rendered h4,
 .markdown-rendered h5,
 .markdown-rendered h6 {
-  border-left: var(--nemo-heading-bar-width, 4px) solid currentColor;
-  padding-left: 0.4em;
+  border-inline-start: var(--nemo-heading-bar-width, 4px) solid currentColor;
+  padding-inline-start: 0.4em;
 }
 
 body.nemo-disable-heading-bars .markdown-source-view.mod-cm6 .cm-header-1,
@@ -905,10 +940,9 @@ body.nemo-disable-heading-bars .markdown-rendered h3,
 body.nemo-disable-heading-bars .markdown-rendered h4,
 body.nemo-disable-heading-bars .markdown-rendered h5,
 body.nemo-disable-heading-bars .markdown-rendered h6 {
-  border-left: 0;
-  padding-left: 0;
+  border-inline-start: 0;
+  padding-inline-start: 0;
 }
-
 
 /* ============================================
    9. ACTIVE LINE INDICATOR
@@ -921,45 +955,37 @@ body.nemo-disable-heading-bars .markdown-rendered h6 {
 .markdown-source-view.mod-cm6 .cm-active.cm-line::before {
   content: "";
   position: absolute;
-  left: -20px;
+  inset-inline-start: -20px;
   top: 15%;
-  height: 70%;
   width: 4px;
-  background: var(--interactive-accent);
+  height: 70%;
+  background-color: var(--interactive-accent);
 }
 
 body.nemo-disable-active-line-indicator .markdown-source-view.mod-cm6 .cm-active.cm-line::before {
   display: none;
 }
 
-
 /* ============================================
-   10. METADATA
+   10. METADATA AND STATUS BAR
    ============================================ */
 
 .metadata-property-icon {
-  display: none !important;
+  display: none;
 }
 
 .metadata-property {
-  padding-top: 2px;
-  padding-bottom: 2px;
   min-height: 0;
+  padding-block: 2px;
 }
-
-
-/* ============================================
-   11. STATUS BAR
-   ============================================ */
 
 .status-bar {
   border-radius: var(--radius-s);
-  margin: 0 !important;
+  margin: 0;
 }
 
-
 /* ============================================
-   12. READING COMFORT
+   11. READING COMFORT
    ============================================ */
 
 .markdown-rendered blockquote,
@@ -967,19 +993,16 @@ body.nemo-disable-active-line-indicator .markdown-source-view.mod-cm6 .cm-active
   padding: 0.65em 0.9em;
 }
 
-/* Preserve the theme's line-height in Live Preview list rows. */
+/* Live Preview list rows: use line-height, not vertical margins */
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-list-line {
   line-height: var(--line-height-normal);
 }
 
-
 /* ============================================
-   13. MOBILE
+   12. MOBILE
    ============================================ */
 
 body.is-mobile {
-  --input-radius: var(--nemo-corner-radius, 0px);
-  --pill-radius: var(--nemo-corner-radius, 0px);
   --touch-radius-xxs: var(--nemo-corner-radius, 0px);
   --touch-radius-xs: var(--nemo-corner-radius, 0px);
   --touch-radius-s: var(--nemo-corner-radius, 0px);
@@ -987,7 +1010,7 @@ body.is-mobile {
   --touch-radius-l: var(--nemo-corner-radius, 0px);
   --touch-radius-xl: var(--nemo-corner-radius, 0px);
 
-  /* Dock geometry (reading mode) */
+  /* Dock geometry: reading mode */
   --nemo-dock-h: 68px;
   --nemo-dock-w: min(76%, 340px);
   --nemo-fab: 88px;
@@ -998,9 +1021,13 @@ body.is-mobile {
   --nemo-gap: 12px;
   --nemo-dock-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
   --nemo-dock-border: 2px;
+
+  --navbar-height: var(--nemo-mobile-navbar-height, 48px);
+  --icon-size: var(--nemo-mobile-navbar-icon-size, 22px);
 }
 
-/* Editing mode: smaller, to match the other editor controls */
+/* Editing mode uses a compact dock. :has() is retained because CSS
+   otherwise cannot style the body based on the active editor descendant. */
 body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   --nemo-dock-h: 50px;
   --nemo-dock-w: min(76%, 320px);
@@ -1013,6 +1040,7 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   --nemo-dock-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
 }
 
+/* Drawer surfaces */
 .is-mobile .workspace-drawer,
 .is-mobile .workspace-drawer-inner,
 .is-mobile .workspace-drawer-header,
@@ -1023,22 +1051,22 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   background-color: var(--background-secondary);
 }
 
-/* ---- Top: no border, header blends into the page ---- */
+/* Top header */
 .is-mobile .view-header {
-  background-color: var(--background-primary) !important;
-  border: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
+  background-color: var(--background-primary);
+  border: 0;
+  box-shadow: none;
   border-radius: 0;
 }
 
 .is-mobile .workspace-tab-header-container {
-  background-image: none !important;
-  border: none !important;
+  background-image: none;
+  border: 0;
 }
 
+/* Mobile hides the desktop tab strip; keep the note pane border simple. */
 .is-mobile .workspace-split.mod-root .workspace-tab-container {
-  border: none !important;
+  border: 1px solid var(--background-modifier-border);
 }
 
 .is-mobile .view-header .clickable-icon {
@@ -1046,33 +1074,33 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   min-height: var(--nemo-mobile-touch-target, 44px);
 }
 
-/* ---- Release ancestors (main note area only, not the drawer) ---- */
+/* Avoid transformed/contained ancestors trapping fixed mobile controls */
 .is-mobile .workspace-split.mod-root .view-header,
 .is-mobile .workspace-split.mod-root .view-header .view-actions,
 .is-mobile .workspace-split.mod-root .workspace-leaf-content {
-  transform: none !important;
-  contain: none !important;
-  filter: none !important;
-  backdrop-filter: none !important;
+  transform: none;
+  contain: none;
+  filter: none;
+  backdrop-filter: none;
 }
 
-/* ---- Bottom dock: square, centered, narrower, lime border ---- */
+/* Bottom navigation dock */
 .is-mobile .mobile-navbar {
-  position: fixed !important;
-  left: calc((100% - var(--nemo-dock-w)) / 2) !important;
-  right: auto !important;
-  bottom: var(--nemo-dock-bottom) !important;
-  width: var(--nemo-dock-w) !important;
-  max-width: none !important;
-  height: var(--nemo-dock-h) !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: fixed;
+  inset-inline-start: calc((100% - var(--nemo-dock-w)) / 2);
+  inset-inline-end: auto;
+  bottom: var(--nemo-dock-bottom);
+  width: var(--nemo-dock-w);
+  max-width: none;
+  height: var(--nemo-dock-h);
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  z-index: 10 !important;
-  background-color: var(--background-secondary) !important;
-  border: var(--nemo-dock-border) solid var(--text-accent) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  z-index: 10;
+  background-color: var(--background-secondary);
+  border: var(--nemo-dock-border) solid var(--text-accent);
+  border-radius: 0;
+  box-shadow: none;
   color: var(--text-normal);
 }
 
@@ -1081,41 +1109,41 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   --icon-size: var(--nemo-dock-icon);
   --icon-stroke: var(--nemo-icon-stroke);
   --icon-color: var(--text-normal);
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+
   display: flex;
   align-items: stretch;
   justify-content: space-around;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .is-mobile .mobile-navbar .clickable-icon {
-  color: var(--text-normal);
-  border-radius: 0;
-  min-width: 0;
-  flex: 1;
-  height: 100%;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  height: 100%;
+  color: var(--text-normal);
+  border-radius: 0;
 }
 
-/* Neobrutal icons: thick strokes, square caps, sharp corners */
 .is-mobile .mobile-navbar svg,
 .is-mobile .view-header .view-action[aria-label^="Current view"] svg {
-  stroke-width: var(--nemo-icon-stroke) !important;
-  stroke-linecap: square !important;
-  stroke-linejoin: miter !important;
+  stroke-width: var(--nemo-icon-stroke);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
 }
 
 .is-mobile .mobile-navbar svg *,
 .is-mobile .view-header .view-action[aria-label^="Current view"] svg * {
-  stroke-linecap: square !important;
-  stroke-linejoin: miter !important;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
 }
 
 .is-mobile .mobile-navbar svg rect,
@@ -1130,9 +1158,8 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   height: var(--nemo-dock-icon);
 }
 
-/* Tab-count box: square it off */
 .is-mobile .mobile-navbar .clickable-icon * {
-  border-radius: 0 !important;
+  border-radius: 0;
 }
 
 .is-mobile .mobile-navbar .clickable-icon:active {
@@ -1140,48 +1167,48 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   color: #111111;
 }
 
-/* ---- Read/Edit button: floats above the dock, right side ---- */
+/* Read/edit floating action button */
 .is-mobile .view-header .view-action[aria-label^="Current view"] {
-  position: fixed !important;
-  right: var(--nemo-edge) !important;
-  bottom: calc(var(--nemo-dock-bottom) + var(--nemo-dock-h) + var(--nemo-gap)) !important;
-  top: auto !important;
-  left: auto !important;
-  width: var(--nemo-fab) !important;
-  height: var(--nemo-fab) !important;
-  min-width: var(--nemo-fab) !important;
-  min-height: var(--nemo-fab) !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: fixed;
+  inset-inline-end: var(--nemo-edge);
+  bottom: calc(var(--nemo-dock-bottom) + var(--nemo-dock-h) + var(--nemo-gap));
+  inset-block-start: auto;
+  inset-inline-start: auto;
+  width: var(--nemo-fab);
+  height: var(--nemo-fab);
+  min-width: var(--nemo-fab);
+  min-height: var(--nemo-fab);
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  z-index: 11 !important;
+  z-index: 11;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--text-accent) !important;
-  border: var(--nemo-dock-border) solid var(--text-accent) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  color: #111111 !important;
+  background-color: var(--text-accent);
+  border: var(--nemo-dock-border) solid var(--text-accent);
+  border-radius: 0;
+  box-shadow: none;
+  color: #111111;
 }
 
 .is-mobile .view-header .view-action[aria-label^="Current view"] svg {
-  width: var(--nemo-fab-icon) !important;
-  height: var(--nemo-fab-icon) !important;
-  color: #111111 !important;
-  stroke: #111111 !important;
+  width: var(--nemo-fab-icon);
+  height: var(--nemo-fab-icon);
+  color: #111111;
+  stroke: #111111;
 }
 
 .is-mobile .view-header .view-action[aria-label^="Current view"]:active {
-  background-color: var(--background-secondary) !important;
+  background-color: var(--background-secondary);
 }
 
 .is-mobile .view-header .view-action[aria-label^="Current view"]:active svg {
-  color: var(--text-accent) !important;
-  stroke: var(--text-accent) !important;
+  color: var(--text-accent);
+  stroke: var(--text-accent);
 }
 
-/* ---- Editing toolbar above the keyboard matches the dock ---- */
+/* Editing toolbar */
 .is-mobile .mobile-toolbar {
   background-color: var(--background-secondary);
   border-top: var(--nemo-dock-border) solid var(--text-accent);
@@ -1193,10 +1220,10 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   border-radius: 0;
 }
 
-/* ---- Misc ---- */
+/* Mobile menus and dialogs */
 .is-mobile .suggestion-container,
 .is-mobile .menu {
-  border-color: var(--modal-border-color, var(--background-modifier-border));
+  border-color: var(--modal-border-color);
 }
 
 .is-mobile .markdown-rendered,
@@ -1213,18 +1240,14 @@ body.is-mobile:has(.workspace-leaf.mod-active .markdown-source-view) {
   border-radius: var(--radius-m);
 }
 
-/* Keep the last lines of a note from hiding behind the dock and button */
+/* Keep note content clear of the dock and floating action button */
 .is-mobile .markdown-reading-view .markdown-preview-view,
 .is-mobile .markdown-source-view.mod-cm6 .cm-scroller {
   padding-bottom: calc(var(--nemo-dock-h) + var(--nemo-fab) + 48px);
 }
 
-/* ---- Fade dock and pencil out while the drawer is open ---- */
-.is-mobile .mobile-navbar,
-.is-mobile .view-header .view-action[aria-label^="Current view"] {
-  transition: opacity 0.15s ease, visibility 0.15s ease;
-}
-
+/* Hide dock controls while the navigation drawer is open.
+   This is the only :has() state selector besides editor mode. */
 body.is-mobile:has(.workspace-drawer-backdrop) .mobile-navbar,
 body.is-mobile:has(.workspace-drawer-backdrop) .view-header .view-action[aria-label^="Current view"] {
   opacity: 0;
@@ -1232,35 +1255,43 @@ body.is-mobile:has(.workspace-drawer-backdrop) .view-header .view-action[aria-la
   pointer-events: none;
 }
 
+/* Full-width dock option */
+body.is-mobile.nemo-mobile-navbar-full-width {
+  --nemo-dock-w: 100%;
+  --nemo-dock-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+body.is-mobile.nemo-mobile-navbar-full-width .mobile-navbar {
+  inset-inline-start: 0;
+  width: 100%;
+}
 
 /* ============================================
-   14. COMMAND PALETTE & QUICK SWITCHER
-   (same rules apply on desktop and mobile)
+   13. COMMAND PALETTE AND QUICK SWITCHER
    ============================================ */
 
 .prompt {
-  --prompt-border-color: var(--modal-border-color, var(--background-modifier-border));
+  --prompt-border-color: var(--modal-border-color);
   --prompt-border-width: 1px;
   --prompt-radius: var(--radius-m);
 }
 
 .prompt .prompt-input-container {
-  margin: 8px !important;
+  margin: 8px;
 }
 
 .prompt .prompt-input-container input.prompt-input {
-  padding: var(--nemo-prompt-input-padding, 10px) !important;
+  padding: var(--nemo-prompt-input-padding, 10px);
   border-radius: var(--radius-s);
 }
 
 .prompt .prompt-results {
-  padding: 4px 8px 8px !important;
+  padding: 4px 8px 8px;
 }
 
 .prompt .prompt-results .suggestion-item {
-  padding:
-    var(--nemo-prompt-item-padding-y, 8px)
-    var(--nemo-prompt-item-padding-x, 12px) !important;
-  margin: 2px 0 !important;
+  padding-block: var(--nemo-prompt-item-padding-y, 8px);
+  padding-inline: var(--nemo-prompt-item-padding-x, 12px);
+  margin-block: 2px;
   border-radius: var(--radius-s);
 }
